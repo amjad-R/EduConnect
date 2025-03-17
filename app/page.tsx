@@ -1,6 +1,7 @@
 import type React from "react"
 import Link from "next/link"
 import { GraduationCap, Users, BookOpen, Building2 } from "lucide-react"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,9 +13,10 @@ export default function HomePage() {
         <div className="container flex h-16 items-center justify-between py-4">
           <div className="flex items-center gap-2">
             <GraduationCap className="h-6 w-6" />
-            <span className="text-xl font-bold">EduConnect</span>
+            <span className="text-xl font-bold">École Connect</span>
           </div>
           <nav className="flex items-center gap-4">
+            <ThemeToggle />
             <Button variant="ghost" asChild>
               <Link href="/login">Connexion</Link>
             </Button>
@@ -65,32 +67,32 @@ export default function HomePage() {
                 description="Accédez à vos cours, devoirs, notes et ressources pédagogiques."
                 icon={<GraduationCap className="h-8 w-8" />}
                 href="/eleves"
-                color="bg-blue-100 dark:bg-blue-950"
-                iconColor="text-blue-600 dark:text-blue-400"
+                color="bg-blue-100 dark:bg-blue-900"
+                iconColor="text-blue-600 dark:text-blue-300"
               />
               <SpaceCard
                 title="Espace Parents"
                 description="Suivez les performances de votre enfant et communiquez avec les enseignants."
                 icon={<Users className="h-8 w-8" />}
                 href="/parents"
-                color="bg-green-100 dark:bg-green-950"
-                iconColor="text-green-600 dark:text-green-400"
+                color="bg-green-100 dark:bg-green-900"
+                iconColor="text-green-600 dark:text-green-300"
               />
               <SpaceCard
                 title="Espace Enseignants"
                 description="Gérez vos cours, publiez des devoirs et suivez les performances des élèves."
                 icon={<BookOpen className="h-8 w-8" />}
                 href="/enseignants"
-                color="bg-purple-100 dark:bg-purple-950"
-                iconColor="text-purple-600 dark:text-purple-400"
+                color="bg-purple-100 dark:bg-purple-900"
+                iconColor="text-purple-600 dark:text-purple-300"
               />
               <SpaceCard
                 title="Espace Administration"
                 description="Supervisez l'ensemble de l'établissement et gérez les utilisateurs."
                 icon={<Building2 className="h-8 w-8" />}
                 href="/admin"
-                color="bg-orange-100 dark:bg-orange-950"
-                iconColor="text-orange-600 dark:text-orange-400"
+                color="bg-orange-100 dark:bg-orange-900"
+                iconColor="text-orange-600 dark:text-orange-300"
               />
             </div>
           </div>

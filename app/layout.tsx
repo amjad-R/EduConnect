@@ -20,7 +20,6 @@ const fontHeading = localFont({
 export const metadata: Metadata = {
   title: "École Connect - Plateforme de Gestion Scolaire",
   description: "Système de gestion scolaire complet avec espaces élèves, parents, enseignants et administration",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -30,8 +29,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" suppressHydrationWarning>
+      <head />
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable, fontHeading.variable)}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
       </body>
@@ -39,6 +39,3 @@ export default function RootLayout({
   )
 }
 
-
-
-import './globals.css'
