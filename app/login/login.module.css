@@ -1,14 +1,11 @@
 .loginTabs {
   --tab-highlight: hsl(var(--primary));
   --tab-highlight-text: hsl(var(--primary-foreground));
+
   position: relative;
   border-radius: 0.75rem;
   overflow: hidden;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  -webkit-border-radius: 0.75rem;
-  -moz-border-radius: 0.75rem;
-  -ms-border-radius: 0.75rem;
-  -o-border-radius: 0.75rem;
 }
 
 .loginTabs [data-state="active"] {
@@ -32,3 +29,4 @@
     width: 100%;
   }
 }
+

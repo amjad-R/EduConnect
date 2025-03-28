@@ -147,7 +147,7 @@ export default function ElevesDashboardPage() {
             </CardContent>
             <CardFooter>
               <Button variant="outline" className="w-full" asChild>
-                <Link href="/eleves/calendrier">Voir tout le calendrier</Link>
+                <Link href="/eleves/notifications">Voir toutes les notifications</Link>
               </Button>
             </CardFooter>
           </Card>

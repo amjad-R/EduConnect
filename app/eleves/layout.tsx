@@ -2,7 +2,7 @@
 
 import { type ReactNode, useEffect, useState } from "react"
 import Link from "next/link"
-import { BarChart3, BookOpen, Calendar, FileText, Home, MessageSquare, Bell } from "lucide-react"
+import { BarChart3, BookOpen, FileText, Home, MessageSquare, Bell } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DashboardShell } from "@/components/dashboard-shell"
 import { cn } from "@/lib/utils"
@@ -83,9 +83,6 @@ function ElevesSidebar() {
         </SidebarItem>
         <SidebarItem href="/eleves/forum" icon={<MessageSquare className="h-4 w-4" />} collapsed={isCollapsed}>
           Forum de discussion
-        </SidebarItem>
-        <SidebarItem href="/eleves/calendrier" icon={<Calendar className="h-4 w-4" />} collapsed={isCollapsed}>
-          Calendrier
         </SidebarItem>
         <SidebarItem href="/eleves/notifications" icon={<Bell className="h-4 w-4" />} collapsed={isCollapsed}>
           Notifications

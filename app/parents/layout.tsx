@@ -2,7 +2,7 @@
 
 import { type ReactNode, useEffect, useState } from "react"
 import Link from "next/link"
-import { BarChart3, Calendar, Home, MessageSquare, FileText, Users } from "lucide-react"
+import { BarChart3, Home, MessageSquare, FileText, Bell } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DashboardShell } from "@/components/dashboard-shell"
 import { cn } from "@/lib/utils"
@@ -81,11 +81,8 @@ function ParentsSidebar() {
         <SidebarItem href="/parents/releves" icon={<FileText className="h-4 w-4" />} collapsed={isCollapsed}>
           Relevés de notes
         </SidebarItem>
-        <SidebarItem href="/parents/calendrier" icon={<Calendar className="h-4 w-4" />} collapsed={isCollapsed}>
-          Calendrier
-        </SidebarItem>
-        <SidebarItem href="/parents/enseignants" icon={<Users className="h-4 w-4" />} collapsed={isCollapsed}>
-          Équipe pédagogique
+        <SidebarItem href="/parents/notifications" icon={<Bell className="h-4 w-4" />} collapsed={isCollapsed}>
+          Notifications
         </SidebarItem>
       </div>
     </div>
