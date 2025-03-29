@@ -361,191 +361,193 @@ export default function CalendarPage() {
               <SelectItem value="admin">Administration</SelectItem>
             </SelectContent>
           </Select>
-
-          <Tabs value={viewMode} onValueChange={setViewMode} className="w-[200px]">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="month">Mois</TabsTrigger>
-              <TabsTrigger value="list">Liste</TabsTrigger>
-            </TabsList>
-          </Tabs>
         </div>
       </div>
 
-      <TabsContent value="month" className="mt-0">
-        <Card>
-          <CardContent className="p-4">
-            <div className="grid grid-cols-7 gap-px bg-muted text-center text-sm">
-              {["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"].map((day) => (
-                <div key={day} className="py-2 font-medium">
-                  {day}
-                </div>
-              ))}
-            </div>
-            <div className="grid grid-cols-7 gap-px bg-muted">
-              {monthDays.map((day, i) => {
-                const dayEvents = getEventsForDate(day)
-                const isCurrentMonth = isSameMonth(day, currentDate)
-                const isSelected = selectedDate ? isSameDay(day, selectedDate) : false
+      <Tabs value={viewMode} onValueChange={setViewMode}>
+        <div className="flex justify-end mb-2">
+          <TabsList className="grid w-[200px] grid-cols-2">
+            <TabsTrigger value="month">Mois</TabsTrigger>
+            <TabsTrigger value="list">Liste</TabsTrigger>
+          </TabsList>
+        </div>
 
-                return (
-                  <div
-                    key={i}
-                    className={`min-h-[100px] bg-background p-2 ${isCurrentMonth ? "" : "text-muted-foreground opacity-50"
-                      } ${isSelected ? "ring-2 ring-primary" : ""}`}
-                    onClick={() => handleDateClick(day)}
-                  >
-                    <div className="flex justify-between">
-                      <span className="text-sm font-medium">{format(day, "d")}</span>
-                      {dayEvents.length > 0 && (
-                        <Badge variant="outline" className="text-xs">
-                          {dayEvents.length}
-                        </Badge>
-                      )}
-                    </div>
-                    <div className="mt-1 space-y-1 overflow-y-auto max-h-[70px]">
-                      {dayEvents.slice(0, 2).map((event) => (
-                        <div
-                          key={event.id}
-                          className={`text-xs truncate rounded px-1 py-0.5 ${event.important
-                            ? "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-300"
-                            : "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300"
-                            }`}
-                        >
-                          {event.title}
-                        </div>
-                      ))}
-                      {dayEvents.length > 2 && (
-                        <div className="text-xs text-muted-foreground text-center">+{dayEvents.length - 2} plus</div>
-                      )}
-                    </div>
+        <TabsContent value="month" className="mt-0">
+          <Card>
+            <CardContent className="p-4">
+              <div className="grid grid-cols-7 gap-px bg-muted text-center text-sm">
+                {["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"].map((day) => (
+                  <div key={day} className="py-2 font-medium">
+                    {day}
                   </div>
-                )
-              })}
-            </div>
-          </CardContent>
-        </Card>
+                ))}
+              </div>
+              <div className="grid grid-cols-7 gap-px bg-muted">
+                {monthDays.map((day, i) => {
+                  const dayEvents = getEventsForDate(day)
+                  const isCurrentMonth = isSameMonth(day, currentDate)
+                  const isSelected = selectedDate ? isSameDay(day, selectedDate) : false
 
-        {selectedDate && (
-          <Card className="mt-4">
+                  return (
+                    <div
+                      key={i}
+                      className={`min-h-[100px] bg-background p-2 ${isCurrentMonth ? "" : "text-muted-foreground opacity-50"
+                        } ${isSelected ? "ring-2 ring-primary" : ""}`}
+                      onClick={() => handleDateClick(day)}
+                    >
+                      <div className="flex justify-between">
+                        <span className="text-sm font-medium">{format(day, "d")}</span>
+                        {dayEvents.length > 0 && (
+                          <Badge variant="outline" className="text-xs">
+                            {dayEvents.length}
+                          </Badge>
+                        )}
+                      </div>
+                      <div className="mt-1 space-y-1 overflow-y-auto max-h-[70px]">
+                        {dayEvents.slice(0, 2).map((event) => (
+                          <div
+                            key={event.id}
+                            className={`text-xs truncate rounded px-1 py-0.5 ${event.important
+                              ? "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-300"
+                              : "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300"
+                              }`}
+                          >
+                            {event.title}
+                          </div>
+                        ))}
+                        {dayEvents.length > 2 && (
+                          <div className="text-xs text-muted-foreground text-center">+{dayEvents.length - 2} plus</div>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </CardContent>
+          </Card>
+
+          {selectedDate && (
+            <Card className="mt-4">
+              <CardHeader>
+                <CardTitle>Événements du {format(selectedDate, "d MMMM yyyy", { locale: fr })}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {getEventsForDate(selectedDate).length === 0 ? (
+                    <p className="text-muted-foreground">Aucun événement prévu pour cette date.</p>
+                  ) : (
+                    getEventsForDate(selectedDate).map((event) => (
+                      <div key={event.id} className="flex items-start justify-between border-b pb-4">
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            {getTypeBadge(event.type)}
+                            {event.important && (
+                              <Badge variant="destructive" className="ml-2">
+                                Important
+                              </Badge>
+                            )}
+                          </div>
+                          <h4 className="font-semibold">{event.title}</h4>
+                          <p className="text-sm text-muted-foreground">{event.description}</p>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <span>Audience: {getAudienceBadge(event.audience)}</span>
+                            {event.location && <span>• Lieu: {event.location}</span>}
+                          </div>
+                        </div>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreHorizontal className="h-4 w-4" />
+                              <span className="sr-only">Actions</span>
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem onClick={() => handleEditEvent(event)}>
+                              <Edit className="mr-2 h-4 w-4" />
+                              Modifier
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() => handleDeleteEvent(event)}
+                              className="text-destructive focus:text-destructive"
+                            >
+                              <Trash2 className="mr-2 h-4 w-4" />
+                              Supprimer
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </TabsContent>
+
+        <TabsContent value="list" className="mt-0">
+          <Card>
             <CardHeader>
-              <CardTitle>Événements du {format(selectedDate, "d MMMM yyyy", { locale: fr })}</CardTitle>
+              <CardTitle>Liste des événements</CardTitle>
+              <CardDescription>
+                {filteredEvents.length} événement{filteredEvents.length !== 1 ? "s" : ""} pour la période sélectionnée
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {getEventsForDate(selectedDate).length === 0 ? (
-                  <p className="text-muted-foreground">Aucun événement prévu pour cette date.</p>
+                {filteredEvents.length === 0 ? (
+                  <p className="text-muted-foreground">Aucun événement ne correspond aux critères sélectionnés.</p>
                 ) : (
-                  getEventsForDate(selectedDate).map((event) => (
-                    <div key={event.id} className="flex items-start justify-between border-b pb-4">
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          {getTypeBadge(event.type)}
-                          {event.important && (
-                            <Badge variant="destructive" className="ml-2">
-                              Important
-                            </Badge>
-                          )}
+                  filteredEvents
+                    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+                    .map((event) => (
+                      <div key={event.id} className="flex items-start justify-between border-b pb-4">
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            {getTypeBadge(event.type)}
+                            {event.important && (
+                              <Badge variant="destructive" className="ml-2">
+                                Important
+                              </Badge>
+                            )}
+                          </div>
+                          <h4 className="font-semibold">{event.title}</h4>
+                          <p className="text-sm text-muted-foreground">{event.description}</p>
+                          <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                            <span>Date: {format(parseISO(event.date), "dd/MM/yyyy")}</span>
+                            {event.endDate && <span>- {format(parseISO(event.endDate), "dd/MM/yyyy")}</span>}
+                            <span>• Audience: {getAudienceBadge(event.audience)}</span>
+                            {event.location && <span>• Lieu: {event.location}</span>}
+                          </div>
                         </div>
-                        <h4 className="font-semibold">{event.title}</h4>
-                        <p className="text-sm text-muted-foreground">{event.description}</p>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <span>Audience: {getAudienceBadge(event.audience)}</span>
-                          {event.location && <span>• Lieu: {event.location}</span>}
-                        </div>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreHorizontal className="h-4 w-4" />
+                              <span className="sr-only">Actions</span>
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem onClick={() => handleEditEvent(event)}>
+                              <Edit className="mr-2 h-4 w-4" />
+                              Modifier
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() => handleDeleteEvent(event)}
+                              className="text-destructive focus:text-destructive"
+                            >
+                              <Trash2 className="mr-2 h-4 w-4" />
+                              Supprimer
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                       </div>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon">
-                            <MoreHorizontal className="h-4 w-4" />
-                            <span className="sr-only">Actions</span>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem onClick={() => handleEditEvent(event)}>
-                            <Edit className="mr-2 h-4 w-4" />
-                            Modifier
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => handleDeleteEvent(event)}
-                            className="text-destructive focus:text-destructive"
-                          >
-                            <Trash2 className="mr-2 h-4 w-4" />
-                            Supprimer
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </div>
-                  ))
+                    ))
                 )}
               </div>
             </CardContent>
           </Card>
-        )}
-      </TabsContent>
-
-      <TabsContent value="list" className="mt-0">
-        <Card>
-          <CardHeader>
-            <CardTitle>Liste des événements</CardTitle>
-            <CardDescription>
-              {filteredEvents.length} événement{filteredEvents.length !== 1 ? "s" : ""} pour la période sélectionnée
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {filteredEvents.length === 0 ? (
-                <p className="text-muted-foreground">Aucun événement ne correspond aux critères sélectionnés.</p>
-              ) : (
-                filteredEvents
-                  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-                  .map((event) => (
-                    <div key={event.id} className="flex items-start justify-between border-b pb-4">
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          {getTypeBadge(event.type)}
-                          {event.important && (
-                            <Badge variant="destructive" className="ml-2">
-                              Important
-                            </Badge>
-                          )}
-                        </div>
-                        <h4 className="font-semibold">{event.title}</h4>
-                        <p className="text-sm text-muted-foreground">{event.description}</p>
-                        <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                          <span>Date: {format(parseISO(event.date), "dd/MM/yyyy")}</span>
-                          {event.endDate && <span>- {format(parseISO(event.endDate), "dd/MM/yyyy")}</span>}
-                          <span>• Audience: {getAudienceBadge(event.audience)}</span>
-                          {event.location && <span>• Lieu: {event.location}</span>}
-                        </div>
-                      </div>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon">
-                            <MoreHorizontal className="h-4 w-4" />
-                            <span className="sr-only">Actions</span>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem onClick={() => handleEditEvent(event)}>
-                            <Edit className="mr-2 h-4 w-4" />
-                            Modifier
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => handleDeleteEvent(event)}
-                            className="text-destructive focus:text-destructive"
-                          >
-                            <Trash2 className="mr-2 h-4 w-4" />
-                            Supprimer
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </div>
-                  ))
-              )}
-            </div>
-          </CardContent>
-        </Card>
-      </TabsContent>
+        </TabsContent>
+      </Tabs>
 
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent className="sm:max-w-[425px]">
@@ -682,4 +684,3 @@ const calendarEvents: CalendarEvent[] = [
     important: false,
   },
 ]
-
