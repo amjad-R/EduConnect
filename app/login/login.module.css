@@ -1,0 +1,32 @@
+.loginTabs {
+  --tab-highlight: hsl(var(--primary));
+  --tab-highlight-text: hsl(var(--primary-foreground));
+
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.loginTabs [data-state="active"] {
+  background-color: var(--tab-highlight);
+  color: var(--tab-highlight-text);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.loginTabs [data-state="inactive"] {
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.loginTabs [data-state="inactive"]:hover {
+  background-color: hsl(var(--muted));
+}
+
+@media (max-width: 640px) {
+  .loginTabs {
+    width: 100%;
+  }
+}
+
