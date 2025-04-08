@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { Mona_Sans as FontSans } from "next/font/google"
 import localFont from "next/font/local"
 
-import "@/app/globals.css"
+import "@/styles/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 
@@ -42,4 +42,3 @@ export default function RootLayout({
 
 
 
-import './globals.css'

@@ -47,7 +47,7 @@ export default function LoginPage() {
         </div>
 
         <Tabs defaultValue="eleves" className="w-full" onValueChange={setUserType}>
-          <TabsList className={`grid w-full grid-cols-4 mb-6 ${styles.loginTabs}`}>
+          <TabsList className={`grid w-full h-22 grid-cols-4 mb-6 ${styles.loginTabs}`}>
             <TabsTrigger value="eleves" className="flex flex-col items-center gap-2 py-3 px-1">
               <GraduationCap className="h-5 w-5" />
               <span className="text-sm font-medium">Élèves</span>

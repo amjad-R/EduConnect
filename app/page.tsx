@@ -83,7 +83,7 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col">
       {/* Navigation */}
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        className={`sticky top-0 z-50 w-full transition-all duration-300 dark:from-gray-900 dark:to-gray-950  ${
           isScrolled ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm" : "bg-transparent"
         }`}
       >
