@@ -83,31 +83,33 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col">
       {/* Navigation */}
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-300 dark:from-gray-900 dark:to-gray-950  ${
-          isScrolled ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+          isScrolled
+            ? "bg-background/90 dark:bg-background/90 backdrop-blur-md shadow-sm"
+            : "bg-transparent"
         }`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             <div className="flex items-center">
               <Link href="/" className="flex items-center space-x-2">
-                <GraduationCap className="h-8 w-8 text-primary" />
-                <span className="text-xl font-bold">EduConnect</span>
+                <GraduationCap className="h-8 w-8 text-primary dark:text-primary-foreground" />
+                <span className="text-xl font-bold text-foreground">EduConnect</span>
               </Link>
             </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link href="/" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                 Home
               </Link>
-              <Link href="#features" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link href="#features" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                 Features
               </Link>
-              <Link href="#testimonials" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link href="#testimonials" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                 Testimonials
               </Link>
-              <Link href="#contact" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link href="#contact" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                 Contact
               </Link>
               <ThemeToggle />
@@ -120,7 +122,7 @@ export default function HomePage() {
             <div className="flex items-center md:hidden space-x-2">
               <ThemeToggle />
               <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {isMenuOpen ? <X className="h-6 w-6 text-foreground" /> : <Menu className="h-6 w-6 text-foreground" />}
               </Button>
             </div>
           </div>
@@ -132,28 +134,28 @@ export default function HomePage() {
             <div className="container mx-auto px-4 py-4 space-y-3">
               <Link
                 href="/"
-                className="block text-sm font-medium hover:text-primary transition-colors"
+                className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link
                 href="#features"
-                className="block text-sm font-medium hover:text-primary transition-colors"
+                className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Features
               </Link>
               <Link
                 href="#testimonials"
-                className="block text-sm font-medium hover:text-primary transition-colors"
+                className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Testimonials
               </Link>
               <Link
                 href="#contact"
-                className="block text-sm font-medium hover:text-primary transition-colors"
+                className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact

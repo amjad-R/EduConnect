@@ -32,36 +32,48 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="container relative flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-darkblue-50 to-background dark:from-darkblue-900 dark:to-background">
+    <div className="container relative flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-muted to-background dark:from-muted/50">
       <div className="absolute right-4 top-4 md:right-8 md:top-8">
         <ThemeToggle />
       </div>
       <Link href="/" className="absolute left-4 top-4 md:left-8 md:top-8 flex items-center gap-2">
-        <GraduationCap className="h-6 w-6" />
-        <span className="text-lg font-bold">École Connect</span>
+        <GraduationCap className="h-6 w-6 text-primary" />
+        <span className="text-lg font-bold text-primary">École Connect</span>
       </Link>
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[400px]">
         <div className="flex flex-col space-y-2 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">Connexion</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-foreground">Connexion</h1>
           <p className="text-sm text-muted-foreground">Entrez vos identifiants pour accéder à votre espace</p>
         </div>
 
         <Tabs defaultValue="eleves" className="w-full" onValueChange={setUserType}>
           <TabsList className={`grid w-full h-22 grid-cols-4 mb-6 ${styles.loginTabs}`}>
-            <TabsTrigger value="eleves" className="flex flex-col items-center gap-2 py-3 px-1">
-              <GraduationCap className="h-5 w-5" />
+            <TabsTrigger
+              value="eleves"
+              className="flex flex-col items-center gap-2 py-3 px-1 text-foreground data-[state=active]:text-primary dark:data-[state=active]:text-primary-foreground"
+            >
+              <GraduationCap className="h-5 w-5 data-[state=active]:text-primary dark:data-[state=active]:text-primary-foreground" />
               <span className="text-sm font-medium">Élèves</span>
             </TabsTrigger>
-            <TabsTrigger value="parents" className="flex flex-col items-center gap-2 py-3 px-1">
-              <Users className="h-5 w-5" />
+            <TabsTrigger
+              value="parents"
+              className="flex flex-col items-center gap-2 py-3 px-1 text-foreground data-[state=active]:text-primary dark:data-[state=active]:text-primary-foreground"
+            >
+              <Users className="h-5 w-5 data-[state=active]:text-primary dark:data-[state=active]:text-primary-foreground" />
               <span className="text-sm font-medium">Parents</span>
             </TabsTrigger>
-            <TabsTrigger value="enseignants" className="flex flex-col items-center gap-2 py-3 px-1">
-              <BookOpen className="h-5 w-5" />
+            <TabsTrigger
+              value="enseignants"
+              className="flex flex-col items-center gap-2 py-3 px-1 text-foreground data-[state=active]:text-primary dark:data-[state=active]:text-primary-foreground"
+            >
+              <BookOpen className="h-5 w-5 data-[state=active]:text-primary dark:data-[state=active]:text-primary-foreground" />
               <span className="text-sm font-medium">Enseignants</span>
             </TabsTrigger>
-            <TabsTrigger value="admin" className="flex flex-col items-center gap-2 py-3 px-1">
-              <Building2 className="h-5 w-5" />
+            <TabsTrigger
+              value="admin"
+              className="flex flex-col items-center gap-2 py-3 px-1 text-foreground data-[state=active]:text-primary dark:data-[state=active]:text-primary-foreground"
+            >
+              <Building2 className="h-5 w-5 data-[state=active]:text-primary dark:data-[state=active]:text-primary-foreground" />
               <span className="text-sm font-medium">Admin</span>
             </TabsTrigger>
           </TabsList>
@@ -126,15 +138,19 @@ interface LoginFormProps {
 
 function LoginForm({ userType, email, setEmail, password, setPassword, onSubmit }: LoginFormProps) {
   return (
-    <Card className="border-2 shadow-md">
+    <Card className="border border-muted shadow-md">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl">Espace {userType}</CardTitle>
-        <CardDescription>Connectez-vous pour accéder à votre espace personnel.</CardDescription>
+        <CardTitle className="text-2xl text-foreground">Espace {userType}</CardTitle>
+        <CardDescription className="text-muted-foreground">
+          Connectez-vous pour accéder à votre espace personnel.
+        </CardDescription>
       </CardHeader>
       <form onSubmit={onSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-foreground">
+              Email
+            </Label>
             <Input
               id="email"
               type="email"
@@ -147,7 +163,9 @@ function LoginForm({ userType, email, setEmail, password, setPassword, onSubmit 
           </div>
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label htmlFor="password">Mot de passe</Label>
+              <Label htmlFor="password" className="text-foreground">
+                Mot de passe
+              </Label>
               <Link
                 href="/reset-password"
                 className="text-xs text-muted-foreground underline underline-offset-4 hover:text-primary"
@@ -166,7 +184,7 @@ function LoginForm({ userType, email, setEmail, password, setPassword, onSubmit 
           </div>
         </CardContent>
         <CardFooter>
-          <Button type="submit" className="w-full h-10 bg-darkblue-700 hover:bg-darkblue-800 text-white">
+          <Button type="submit" className="w-full h-10 bg-primary hover:bg-primary/90 text-primary-foreground">
             Se connecter
           </Button>
         </CardFooter>
@@ -174,4 +192,3 @@ function LoginForm({ userType, email, setEmail, password, setPassword, onSubmit 
     </Card>
   )
 }
-
